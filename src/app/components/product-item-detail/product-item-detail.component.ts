@@ -2,6 +2,7 @@ import { CartItemsService } from './../cart-items.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StoreData } from './../storeData.service';
+import { ProductModule } from '../product/product.module';
 
 @Component({
   selector: 'app-product-item-detail',
@@ -9,8 +10,14 @@ import { StoreData } from './../storeData.service';
   styleUrls: ['./product-item-detail.component.css'],
 })
 export class ProductItemDetailComponent implements OnInit {
-  itemData: { [key: string]: string } = {};
-  selectedNumber: number = 1;
+  itemData: ProductModule = {
+    id: 0,
+    name: '',
+    price: 0,
+    url: '',
+    description: '',
+    number: 0,
+  };
 
   constructor(
     private storeData: StoreData,
@@ -24,17 +31,16 @@ export class ProductItemDetailComponent implements OnInit {
     this.storeData.getData().subscribe((data) => {
       for (let i = 0; i < data.length; i++) {
         if (id == data[i]['id']) {
+          console.log(data);
           this.itemData = data[i];
+          this.itemData.number = 1;
         }
       }
     });
   }
 
-  value(event: number) {
-    this.selectedNumber = event;
-  }
-  submit(item: any) {
-    this.cartItems.addItem(item, this.selectedNumber);
-    alert(`${this.selectedNumber} : Item Add`);
+  submit(item: ProductModule) {
+    this.cartItems.addItem(item);
+    alert(`${this.itemData.number} : Item Add`);
   }
 }

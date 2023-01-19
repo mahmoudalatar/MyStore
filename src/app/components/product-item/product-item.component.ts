@@ -1,6 +1,7 @@
 import { CartItemsService } from './../cart-items.service';
 import { StoreData } from './../storeData.service';
 import { Component, OnInit } from '@angular/core';
+import { ProductModule } from '../product/product.module';
 
 @Component({
   selector: 'app-product-item',
@@ -8,8 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-item.component.css'],
 })
 export class ProductItemComponent implements OnInit {
-  datas: [] = [];
-  selectedNumber: number = 1;
+  datas: ProductModule[] = [];
 
   constructor(
     private storeData: StoreData,
@@ -19,14 +19,14 @@ export class ProductItemComponent implements OnInit {
   ngOnInit(): void {
     this.storeData.getData().subscribe((data) => {
       this.datas = data;
+      for (let i = 0; i < this.datas.length; i++) {
+        this.datas[i]['number'] = 1;
+      }
     });
   }
 
-  value(event: number) {
-    this.selectedNumber = event;
-  }
-  submit(item: any) {
-    this.cartItems.addItem(item, this.selectedNumber);
-    alert(`${this.selectedNumber} : Item Add`);
+  submit(item: ProductModule) {
+    this.cartItems.addItem(item);
+    alert(`${item['number']} : Item Add`);
   }
 }

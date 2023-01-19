@@ -43,11 +43,11 @@ export class CartComponent implements OnInit {
   }
 
   onSubmit() {
-    this.fullName = '';
-    this.creditCard = '';
-    this.address = '';
-    this.items = '';
     this.done = true;
     this.cartItems.removeItems();
+    // this.fullName = '';
+    // this.creditCard = '';
+    // this.address = '';
+    // this.items = '';
   }
 }

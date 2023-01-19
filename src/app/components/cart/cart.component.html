@@ -17,12 +17,13 @@
             min="0"
             class="number-input"
             type="number"
-            [value]="data['number']"
-            (change)="value($any($event.target).value, data['name'])"
+            [(ngModel)]="data['number']"
+            (ngModelChange)="value($event, data['name'])"
             name="prodct-item"
             id="item"
           />
         </div>
+        <!-- (ngModelChange)="value($any($event.target).value, data['name'])" -->
       </div>
       <h2>Total: $ {{ totalCost | number : "1.2-2" }}</h2>
     </div>
@@ -52,12 +53,13 @@
         <input
           type="text"
           required
-          maxlength="17"
           minlength="16"
+          maxlength="17"
           placeholder="(16-digit number)"
           id="card"
           name="card"
           [(ngModel)]="creditCard"
+          oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
         />
         <button [disabled]="form.invalid" type="submit">Submit</button>
       </form>

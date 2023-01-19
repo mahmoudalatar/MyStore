@@ -8,11 +8,7 @@
       <label for="item">{{ data["name"] }}</label>
     </p>
     <p>{{ data["price"] }}</p>
-    <select
-      (change)="value($any($event.target).value)"
-      name="prodct-item"
-      id="item"
-    >
+    <select [(ngModel)]="data.number" name="prodct-item" id="item">
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
