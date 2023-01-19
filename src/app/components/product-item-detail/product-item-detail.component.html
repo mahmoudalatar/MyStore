@@ -1,0 +1,31 @@
+<div class="detail-container">
+  <div>
+    <img [src]="itemData['url']" alt="" />
+  </div>
+  <div>
+    <h3>
+      <label for="item">{{ itemData["name"] }}</label>
+    </h3>
+    <p>{{ itemData["price"] }}</p>
+    <select
+      name="prodct-item"
+      id="item"
+      (change)="value($any($event.target).value)"
+    >
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+    <br />
+    <button (click)="submit(itemData)">submit</button>
+    <p>{{ itemData["description"] }}</p>
+    <a routerLink="/product-item">Back to product list</a>
+  </div>
+</div>
