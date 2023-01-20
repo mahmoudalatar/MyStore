@@ -1,5 +1,6 @@
+import { ProductModule } from './../product/product.module';
 import { CartItemsService } from './../cart-items.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -9,11 +10,11 @@ import { FormsModule } from '@angular/forms';
 })
 export class CartComponent implements OnInit {
   selectedNumber: number = 0;
-  items: any;
+  items: ProductModule[] = [];
   totalCost: number = 0;
   fullName: string = '';
-  address: string = '';
-  creditCard: string = '';
+  creditCard: number = 0;
+
   done: boolean = false;
 
   constructor(private cartItems: CartItemsService) {}
@@ -29,6 +30,7 @@ export class CartComponent implements OnInit {
         this.items[i]['number'] = itemNum;
         this.clacTotal();
       } else if (this.items[i]['name'] == name && itemNum == 0) {
+        alert(`${this.items[i].name} : Item Removed`);
         this.cartItems.removeItem(this.items[i]['id']);
       }
     }
@@ -42,12 +44,11 @@ export class CartComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  onSubmit(massage: string): void {
+    this.fullName = massage;
+    // console.log(massage);
+
     this.done = true;
     this.cartItems.removeItems();
-    // this.fullName = '';
-    // this.creditCard = '';
-    // this.address = '';
-    // this.items = '';
   }
 }

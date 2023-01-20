@@ -11,6 +11,7 @@ import { ProductItemComponent } from './components/product-item/product-item.com
 import { ProductItemDetailComponent } from './components/product-item-detail/product-item-detail.component';
 import { CartComponent } from './components/cart/cart.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
+import { FormComponent } from './components/cart/form/form.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
 
     CartComponent,
     ConfirmationComponent,
+    FormComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],

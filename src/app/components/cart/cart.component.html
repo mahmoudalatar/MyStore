@@ -1,5 +1,5 @@
 <div *ngIf="!done">
-  <div class="cart-container" *ngIf="items != ''">
+  <div class="cart-container" *ngIf="items.length != 0">
     <div class="cart-item-details">
       <div class="cart-item" *ngFor="let data of items">
         <div class="left">
@@ -28,47 +28,12 @@
       <h2>Total: $ {{ totalCost | number : "1.2-2" }}</h2>
     </div>
     <div class="cart-panel">
-      <form #form="ngForm" (ngSubmit)="onSubmit()">
-        <label for="name">Full name</label>
-        <input
-          type="text"
-          required
-          minlength="3"
-          placeholder="(minimum 3 characters)"
-          id="name"
-          name="name"
-          [(ngModel)]="fullName"
-        />
-        <label for="address">Address</label>
-        <input
-          type="text"
-          required
-          minlength="6"
-          placeholder="(minimum 6 characters)"
-          id="address"
-          name="address"
-          [(ngModel)]="address"
-        />
-        <label for="card">Credit card number</label>
-        <input
-          type="text"
-          required
-          minlength="16"
-          maxlength="17"
-          placeholder="(16-digit number)"
-          id="card"
-          name="card"
-          [(ngModel)]="creditCard"
-          oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-        />
-        <button [disabled]="form.invalid" type="submit">Submit</button>
-      </form>
+      <app-form (confirmation)="onSubmit($any($event))"></app-form>
     </div>
   </div>
-  <div class="empty-cart-message" *ngIf="items == ''">
+  <div class="empty-cart-message" *ngIf="items.length == 0">
     <h1>Cart is empty</h1>
   </div>
-  <!-- <p>{{ items | json }}</p> -->
 </div>
 
 <div *ngIf="done">
