@@ -11,10 +11,7 @@ import { ProductModule } from '../product/product.module';
 export class ProductItemComponent implements OnInit {
   datas: ProductModule[] = [];
 
-  constructor(
-    private storeData: StoreData,
-    private cartItems: CartItemsService
-  ) {}
+  constructor(private storeData: StoreData) {}
 
   ngOnInit(): void {
     this.storeData.getData().subscribe((data) => {
@@ -23,10 +20,5 @@ export class ProductItemComponent implements OnInit {
         this.datas[i]['number'] = 1;
       }
     });
-  }
-
-  submit(item: ProductModule) {
-    this.cartItems.addItem(item);
-    alert(`${item['number']} : Item Add`);
   }
 }
